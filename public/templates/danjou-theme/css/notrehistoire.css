@@ -1,0 +1,16 @@
+body {
+  background-color: #ede8e3;
+}
+h3 {
+  font-family: "Caladea", serif;
+  font-style: italic;
+  font-weight: normal;
+  font-size: 150px;
+  line-height: 120px;
+  /* or 67% */
+  padding: 50px 0;
+  text-align: center;
+  letter-spacing: 0.05em;
+
+  color: #844c3a;
+}

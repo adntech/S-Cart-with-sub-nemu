@@ -1,0 +1,58 @@
+body {
+  background-color: #ede8e3;
+}
+
+#legal-content .container-3 {
+  padding-top: 100px;
+}
+
+#legal-content .container-3 h3 {
+  font-family: "Old Standard TT", serif;
+  font-style: italic;
+  font-weight: normal;
+  font-size: 34px;
+  line-height: 41px;
+  text-align: center;
+  letter-spacing: 0.05em;
+  color: #844c3a;
+  margin-bottom: 20px;
+}
+
+#legal-content .container-3 span {
+  font-family: "Open Sans", sans-serif;
+  font-style: normal;
+  font-weight: bold;
+  font-size: 18px;
+  line-height: 20px;
+  text-align: center;
+  display: block;
+  letter-spacing: 0.1em;
+  color: #844c3a;
+  margin: 40px 0;
+}
+
+#legal-content .container-3 p{
+    font-family: "Open Sans", sans-serif;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 20px;
+    line-height: 20px;
+    text-align: center;
+    letter-spacing: 0.1em;
+    color: #844C3A; 
+    margin-bottom: 20px;
+}
+
+.container-4 span{
+  font-family: "Open Sans", sans-serif;
+  font-style: normal;
+font-weight: normal;
+font-size: 18px;
+line-height: 25px;
+/* or 167% */
+display: block;
+text-align: center;
+letter-spacing: 0.1em;
+
+color: #844C3A;
+}

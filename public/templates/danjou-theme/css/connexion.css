@@ -1,0 +1,187 @@
+body {
+  background-color: #ede8e3;
+}
+
+.connexion-container {
+  display: flex;
+  justify-content: space-between;
+  padding: 100px 0 50px 0;
+}
+
+.connexion-left,
+.connexion-right,
+.connexion-left form {
+  display: flex;
+  flex-direction: column;
+  width: 40%;
+}
+
+.connexion-left form,
+#inscription form {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  position: relative;
+  padding-bottom: 50px;
+  justify-content: center;
+}
+
+.connexion-container h3,
+#inscription h3 {
+  font-family: "Caladea", serif;
+  font-style: italic;
+  font-weight: normal;
+  font-size: 35px;
+  line-height: 100px;
+  text-align: center;
+  letter-spacing: 0.05em;
+  color: #844c3a;
+}
+
+.connexion-container label,
+#inscription label {
+  font-family: "Open Sans", sans-serif;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 12px;
+  line-height: 24px;
+  letter-spacing: 0.2em;
+  color: #844c3a;
+}
+
+.connexion-container input:focus,
+#inscription input:focus {
+  outline: none;
+}
+
+.connexion-left form a {
+  font-family: "Open Sans", sans-serif;
+  font-style: italic;
+  font-weight: 300;
+  font-size: 12px;
+  line-height: 24px;
+  letter-spacing: 0.2em;
+  color: #844c3a;
+  margin-bottom: 20px;
+}
+
+.connexion-left form a:hover {
+  text-decoration: underline;
+}
+
+.bottom-cnx {
+  position: relative;
+  border-top: 1px solid #844c3a;
+  margin-top: 40px;
+}
+
+.or {
+  font-family: "Open Sans", sans-serif;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 12px;
+  line-height: 24px;
+  letter-spacing: 0.2em;
+  color: #844c3a;
+  text-align: center;
+  position: absolute;
+  right: 50%;
+  top: -12px;
+  background-color: #ede8e3;
+  padding: 0 10px;
+  transform: translateX(50%);
+}
+
+.connexion-left form input,
+#inscription input {
+  height: 40px;
+  width: 100%;
+  border: 0;
+  padding: 10px;
+
+  font-size: 12px;
+}
+#inscription input {
+  margin-bottom: 30px;
+}
+.connexion-left form input:first-child {
+  margin-bottom: 30px;
+}
+
+.connexion-left .btn-cnx {
+  max-width: 162px;
+  height: 41px;
+  border: 1px solid #844c3a;
+  background: none;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 12px;
+  line-height: 24px;
+  text-align: center;
+  letter-spacing: 0.2em;
+  color: #844c3a;
+  transition: all 0.35s;
+  position: absolute;
+  text-align: center;
+  right: 0;
+  bottom: 0;
+
+  cursor: pointer;
+}
+
+.btn-cnx span {
+  position: relative;
+  z-index: 2;
+  padding: 30px;
+}
+
+
+.btn-cnx:hover {
+  background: #844c3a;
+}
+.btn-cnx:hover:hover {
+  color: #fff;
+}
+
+.social-cnx {
+  margin-top: 55px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.social-cnx a {
+  padding: 0 25px;
+}
+
+.btn-cnx {
+  max-width: fit-content;
+  height: 41px;
+  border: 1px solid #844c3a;
+  background: none;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 12px;
+  line-height: 24px;
+  text-align: center;
+  letter-spacing: 0.2em;
+  color: #844c3a;
+  transition: all 0.35s;
+  position: relative;
+  right: 0;
+  bottom: 0;
+  cursor: pointer;
+  margin: 0 auto;
+  padding: 0 10px;
+  display: block;
+}
+
+.btn-cnx span {
+  position: relative;
+  z-index: 2;
+  padding: 30px;
+}
+
+#inscription h3{
+  padding-top:70px;
+}

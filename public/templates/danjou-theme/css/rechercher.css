@@ -1,0 +1,91 @@
+body{
+  background-color: #ede8e3;
+}
+
+#rechercher h3 {
+  font-family: "Caladea", serif;
+  font-style: italic;
+  font-weight: normal;
+  font-size: 40px;
+  line-height: 100px;
+  /* or 250% */
+
+  text-align: center;
+  letter-spacing: 0.05em;
+  margin: 40px 0;
+  color: #844c3a;
+}
+
+.rechercher-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  display: none;
+}
+
+.rechercher-container div {
+  display: flex;
+  flex-direction: column;
+  width: 40%;
+  margin: 30px 0;
+}
+
+.rechercher-container div a {
+  font-family: "Caladea", serif;
+  font-style: normal;
+  font-weight: bold;
+  font-size: 20px;
+  text-align: center;
+  letter-spacing: 0.2em;
+  color: #000000;
+  position: relative;
+  width: fit-content;
+  margin: 10px auto;
+}
+
+.rechercher-container div a:after {
+  background: none repeat scroll 0 0 transparent;
+  bottom: -3px;
+  content: "";
+  display: block;
+  height: 2px;
+  left: 50%;
+  position: absolute;
+  background: black;
+  transition: width 0.5s ease 0s, left 0.5s ease 0s;
+  width: 0;
+}
+
+.rechercher-container div a:hover:after {
+  width: 100%;
+  left: 0;
+}
+
+.rechercher-container div span {
+  font-family: "Open Sans" Hebrew;
+  font-style: normal;
+  font-weight: 300;
+  font-size: 17px;
+  text-align: center;
+  letter-spacing: 0.2em;
+  color: #000000;
+}
+
+.rechercher-container div span.promo {
+  text-decoration: line-through;
+}
+
+#searchInput {
+  width: 90%;
+  margin: 0 auto;
+  display: block;
+  border: 0;
+  border-bottom: 1px solid black;
+  font-size: 20px;
+  font-family: "open sans";
+  background-color: #ede8e3;
+}
+
+#searchInput:focus {
+  outline: none;
+}
