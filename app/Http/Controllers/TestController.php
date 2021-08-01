@@ -5,7 +5,8 @@ use App\Http\Controllers\RootAdminController;
 //use SCart\Core\Admin\Models\AdminLink;
 use SCart\Core\Admin\Controllers\AdminStoreLinkController;
 use App\Models\Zlink;
-
+use APP\Models\link_parrent_chil;
+use Validator;
 
 class TestController extends AdminStoreLinkController
 {
@@ -30,6 +31,7 @@ class TestController extends AdminStoreLinkController
         $data['blockBottom'] = sc_config_group('blockBottom', \Request::route()->getName());
 
         $listTh = [
+            'id' => sc_language_render('admin.link.id'),
             'name' => sc_language_render('admin.link.name'),
             'url' => sc_language_render('admin.link.url'),
             'target' => sc_language_render('admin.link.target'),
@@ -62,6 +64,7 @@ class TestController extends AdminStoreLinkController
         $dataTr = [];
         foreach ($dataTmp as $key => $row) {
             $dataMap = [
+                'id' => sc_language_render($row['id']),
                 'name' => sc_language_render($row['name']),
                 'url' => $row['url'],
                 'target' => $this->arrTarget[$row['target']] ?? '',
@@ -69,7 +72,7 @@ class TestController extends AdminStoreLinkController
                 'sort' => $row['sort'],
                 
                 'status' => $row['status'] ? '<span class="badge badge-success">ON</span>' : '<span class="badge badge-danger">OFF</span>',
-                'parrent'=> 5,
+                'parrent'=> $row['parrent_id'],
             ];
 
             if ((sc_config_global('MultiVendorPro') || sc_config_global('MultiStorePro')) && session('adminStoreId') == SC_ID_ROOT) {
@@ -112,6 +115,7 @@ class TestController extends AdminStoreLinkController
      */
     public function create()
     {
+        
         $data = [
             'title'             => sc_language_render('admin.link.add_new_title'),
             'subTitle'          => '',
@@ -122,10 +126,84 @@ class TestController extends AdminStoreLinkController
             'arrGroup'          => $this->arrGroup(),
             'url_action'        => sc_route_admin('admin_store_link.create'),
         ];
-        return view($this->templatePathAdmin.'screen.store_link')
+      
+        $data['avable_link']= Zlink::getreductLinkListAdmin()->toArray();
+           
+      // var_dump($data['avable_link']);var_dump($data['arrTarget']);die;
+        return view('vendor.admin.screen.store_link')
             ->with($data);
     }
+  /**
+     * Post create new item in admin
+     * @return [type] [description]
+     */
+    public function postCreate()
+    {
+        $data = request()->all();
+        $dataOrigin = request()->all();
+        $validator = Validator::make($dataOrigin, [
+            'name'   => 'required',
+            'url'    => 'required',
+            'group'  => 'required',
+            'target' => 'required',
+        ]);
 
+        if ($validator->fails()) {
+            // dd($validator->messages());
+            return redirect()->back()
+                ->withErrors($validator)
+                ->withInput();
+        }
+        $dataInsert = [
+            'name'     => $data['name'],
+            'url'      => $data['url'],
+            'target'   => $data['target'],
+            'group'    => $data['group'],
+            'sort'     => $data['sort'],
+            'status'   => empty($data['status']) ? 0 : 1,
+        ];
+        
+        $link = Zlink::createLinkAdmin($dataInsert);
+        if ($data['parrent']){
+          $lpc= $link->set_parrent($data['parrent']);
+        }
+         
+
+        if (sc_config_global('MultiStorePro') || sc_config_global('MultiVendorPro')) {
+            // If multi-store
+            $shopStore        = $data['shop_store'] ?? [];
+            $link->stores()->detach();
+            if ($shopStore) {
+                $link->stores()->attach($shopStore);
+            }
+        }
+
+        return redirect()->route('admin_store_link.index')->with('success', sc_language_render('action.create_success'));
+
+    }
+/**
+ * Form edit
+ */
+public function edit($id)
+{
+    $link = Zlink::getLinkAdmin($id);
+    if (!$link) {
+        return redirect()->route('admin.data_not_found')->with(['url' => url()->full()]);
+    }
+    $data = [
+        'title' => sc_language_render('action.edit'),
+        'subTitle' => '',
+        'title_description' => '',
+        'icon' => 'fa fa-edit',
+        'link' => $link,
+        'arrTarget' => $this->arrTarget,
+        'arrGroup' => $this->arrGroup(),
+        'url_action' => sc_route_admin('admin_store_link.edit', ['id' => $link['id']]),
+    ];
+    $data['avable_link']= Zlink::getreductLinkListAdmin()->toArray();
+    return view('vendor.admin.screen.store_link')
+        ->with($data);
+}
     
 
 }

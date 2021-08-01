@@ -15,10 +15,8 @@ class CreateLinkParrentChilsTable extends Migration
     {
         Schema::create('link_parrent_chils', function (Blueprint $table) {
             
-            $table->foreignId('link_id')->references('id')->on('sc_shop_link')
-            ->constrained()
-            ->onUpdate('cascade')
-            ->onDelete('cascade');            
+            $table->foreignId('link_id')->references('id')->on('sc_shop_link');
+              
             $table->unsignedBigInteger('parrent_id');
             $table->foreign('parrent_id');
             
