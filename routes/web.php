@@ -27,8 +27,5 @@ Route::group(['prefix' => 'store_link'], function () {
    Route::post('/delete', 'ZAdminStoreLinkController@deleteList')->name('admin_store_link.delete');
 });});
 
- Route::get('/test', function () {
-   
-   return ;
- });
+
 
