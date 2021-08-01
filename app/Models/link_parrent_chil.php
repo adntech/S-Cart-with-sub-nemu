@@ -13,6 +13,7 @@ class link_parrent_chil extends Model
     public $table = 'link_parrent_chils';
     public $timestamps = false;
     protected $fillable = ['link_id','parrent_id'];
+    protected $primaryKey = 'link_id';
 
    
     

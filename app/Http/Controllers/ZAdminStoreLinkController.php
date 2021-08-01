@@ -8,7 +8,7 @@ use App\Models\Zlink;
 use APP\Models\link_parrent_chil;
 use Validator;
 
-class TestController extends AdminStoreLinkController
+class ZAdminStoreLinkController extends AdminStoreLinkController
 {
     public function index()
     {
@@ -187,6 +187,7 @@ class TestController extends AdminStoreLinkController
 public function edit($id)
 {
     $link = Zlink::getLinkAdmin($id);
+   
     if (!$link) {
         return redirect()->route('admin.data_not_found')->with(['url' => url()->full()]);
     }
@@ -205,5 +206,57 @@ public function edit($id)
         ->with($data);
 }
     
+/**
+     * update status
+     */
+    public function postEdit($id)
+    {
+        $link = Zlink::getLinkAdmin($id);
+        if (!$link) {
+            return redirect()->route('admin.data_not_found')->with(['url' => url()->full()]);
+        }
+        $data = request()->all();
+        $dataOrigin = request()->all();
+        $validator = Validator::make($dataOrigin, [
+            'name'   => 'required',
+            'url'    => 'required',
+            'group'  => 'required',
+            'target' => 'required',
+        ]);
+
+        if ($validator->fails()) {
+            // dd($validator->messages());
+            return redirect()->back()
+                ->withErrors($validator)
+                ->withInput();
+        }
+        //Edit
+        $dataUpdate = [
+            'name'     => $data['name'],
+            'url'      => $data['url'],
+            'target'   => $data['target'],
+            'group'    => $data['group'],
+            'sort'     => $data['sort'],
+            'status'   => empty($data['status']) ? 0 : 1,
+            
+        ];
+        $link->update($dataUpdate);
+        if ($data['parrent']){
+            
+            $lpc= $link->set_parrent($data['parrent']);
+          }
+
+        if (sc_config_global('MultiStorePro') || sc_config_global('MultiVendorPro')) {
+            // If multi-store
+            $shopStore        = $data['shop_store'] ?? [];
+            $link->stores()->detach();
+            if ($shopStore) {
+                $link->stores()->attach($shopStore);
+            }
+        }
+
+        return redirect()->route('admin_store_link.index')->with('success', sc_language_render('action.edit_success'));
+
+    }
 
 }

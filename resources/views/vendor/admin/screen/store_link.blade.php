@@ -162,17 +162,18 @@
 
                                 </div>
                             </div>
-                            <div class="form-group row {{ $errors->has('parrent') ? ' text-red' : '' }}">>
+                            <div class="form-group row {{ $errors->has('parrent') ? ' text-red' : '' }}">
                                 <label for="parrent" class="col-sm-2 col-form-label">{{ sc_language_render('admin.link.parrent') }}</label>
                                 <div class="col-sm-8">
-                                <select class="form-control group select2" style="width: 100%;" name="parrent" >   
+                                <select class="form-control group select3" style="width: 100%;" name="parrent" >   
                                 @foreach ($avable_link as $alink)
-                                            <option value="{{ $alink['id']}}" {{ (old('parrent',$link['parrent']??'') ==$k) ? 'selected':'' }}>{{ $v }}>{{ $alink['name']}}</option>
+                                            <option value="{{ $alink['id']}}" {{ $alink['id'] == $link['parrent_id'] ? 'selected="selected"' : ''}}>{{ $v }}>{{ $alink['name']  }}</option>
                                         @endforeach
                                        
                                     </select>
                                     </div>
                             </div>
+                            
                     </div>
                     <!-- /.card-body -->
 
